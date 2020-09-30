@@ -1,4 +1,4 @@
-# University Search API
+# Movies Search API
 
 
 ### Installation
