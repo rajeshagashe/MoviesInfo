@@ -5,6 +5,7 @@ from flask import (
 from app.models.movies import MoviesData
 from app.extensions import sql_db
 from app.views.api_decorators import authenticate_if_user, authorize_if_admin
+# from app.views.search import get_user
 
 import traceback
 import datetime
@@ -43,6 +44,7 @@ def create():
         movie = MoviesData()
 
         if not check_if_all_fields(entry):
+            # assumption all fields necessary.
             raise Exception("All fields not provided.")
 
         invalid_field_types = check_if_field_types_invalid(entry)
@@ -102,7 +104,8 @@ def update(movie_id=None):
         if invalid_field_types:
             raise Exception("Invalid Field_types")
 
-        update["genre"] = ",".join(sorted([i.strip() for i in update["genre"]]))
+        if update.get("genre"):
+            update["genre"] = ",".join(sorted([i.strip() for i in update["genre"]]))
 
         target_row = MoviesData.query.filter_by(id=movie_id)
         target_row.update(update)
@@ -190,3 +193,12 @@ def check_if_field_types_invalid(entry):
         error_msg += "imdb_score must be a number. \n"
 
     return error_msg
+
+# @crud_blueprint.before_app_request
+# def load_logged_in_user():
+#     user_id = session.get('user_id', 0)
+
+#     if not user_id:
+#         g.user = None
+#     else:
+#         g.user = get_user(user_id)

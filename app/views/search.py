@@ -3,6 +3,7 @@ from flask import (
 )
 
 from app.models.movies import MoviesData
+from app.models.user import UserData
 from app.extensions import sql_db
 from app.views.api_decorators import authenticate_if_user, authorize_if_admin
 
@@ -14,6 +15,7 @@ from sqlalchemy import func
 search_blueprint = Blueprint("search", __name__)
 
 @search_blueprint.route("/movies", methods=["GET"])
+@authenticate_if_user
 def search():
     try:
         # consider saving movie names without spaces to allow searches without spaces
@@ -53,3 +55,22 @@ def search():
     except Exception as e:
         sql_db.session.rollback()
         return e.__str__()
+
+# @search_blueprint.before_app_request
+# def load_logged_in_user():
+#     user_id = session.get('user_id', 0)
+
+#     if not user_id:
+#         g.user = None
+#     else:
+#         g.user = get_user(user_id)
+
+# def get_user(user_id):
+#     user = UserData.query.filter_by(id=user_id)
+#     user_count = user.count()
+#     if user_count:
+#         return user.first()
+#     return False
+
+# from sqlalchemy import or_
+# filter(or_(User.name == 'ed', User.name == 'wendy'))
