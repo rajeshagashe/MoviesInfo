@@ -23,12 +23,13 @@ def read(record_id=0):
             response = list()
             for i in row:
                 response.append(i.to_json())
+            response.append({"status": "success", "msg": "crud/read msg"})
             return json.dumps(response)
         else:
             row = MoviesData.query.get(record_id)
 
         sql_db.session.commit()
-        return json.dumps([row.to_json()])
+        return json.dumps([row.to_json(), {"status": "success", "msg": "crud/read msg"}])
 
     except:
         sql_db.session.rollback()
@@ -60,7 +61,7 @@ def create():
         sql_db.session.add(movie)
         sql_db.session.commit()
 
-        return json.dumps([movie.to_json()])
+        return json.dumps([movie.to_json(), {"status": "success", "msg": "New movie added."}])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -112,7 +113,7 @@ def update(movie_id=None):
         sql_db.session.commit()
         
         update.pop("updated_at")
-        return json.dumps([update])
+        return json.dumps([update, {"status": "success", "msg": "Changes Saved."}])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -140,7 +141,7 @@ def delete(movie_id=None):
         target_row.delete()
         sql_db.session.commit()
 
-        return json.dumps([movie_details.to_json()])
+        return json.dumps([movie_details.to_json(), {"status": "success", "msg": "Deleted."}])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -194,12 +195,3 @@ def check_if_field_types_invalid(entry):
         error_msg += "imdb_score must be a number. \n"
 
     return error_msg
-
-# @crud_blueprint.before_app_request
-# def load_logged_in_user():
-#     user_id = session.get('user_id', 0)
-
-#     if not user_id:
-#         g.user = None
-#     else:
-#         g.user = get_user(user_id)

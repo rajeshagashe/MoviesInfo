@@ -43,7 +43,7 @@ def register():
 
         sql_db.session.add(user)
         sql_db.session.commit()
-        return json.dumps([user.to_json()])
+        return json.dumps([user.to_json(), {"status": "success", "msg": "User registered."}])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -72,7 +72,7 @@ def login():
         session['user_id'] = user.id
 
         sql_db.session.commit()
-        return json.dumps([user.to_json()])
+        return json.dumps([user.to_json(), {"status": "success", "msg": "Logged in"}])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -85,7 +85,7 @@ def login():
 def logout():
     try:
         session.clear()
-        return json.dumps(["Logged Out."]) 
+        return json.dumps(["Logged Out.", {"status": "success", "msg": "Logged Out"}]) 
     except:
         return "Please Try Again."
 

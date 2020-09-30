@@ -2,6 +2,7 @@ from app.extensions import sql_db
 import datetime
 
 class MoviesData(sql_db.Model):
+    #unique together on name + director
     id = sql_db.Column(sql_db.Integer, primary_key=True)
     name = sql_db.Column(sql_db.Text, default = "")
     nn_popularity = sql_db.Column(sql_db.Float, default = 0.0)
