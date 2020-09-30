@@ -20,8 +20,8 @@ user_blueprint = Blueprint("user", __name__)
 def register():
     try:
         form = request.get_json()
-        user_name = str(form.get("user_name"))
-        password = str(form.get("password"))
+        user_name = str(form.get("user_name", ""))
+        password = str(form.get("password",""))
         user_role = str(form.get("user_role", "user"))
 
         if not user_name:
@@ -37,7 +37,6 @@ def register():
             raise Exception("user_name taken.")
         
         user = UserData()
-
         user.user_name = user_name
         user.password = generate_password_hash(password)
         user.user_role = user_role

@@ -60,7 +60,7 @@ def create():
         sql_db.session.add(movie)
         sql_db.session.commit()
 
-        return json.dumps[movie.to_json()]
+        return json.dumps([movie.to_json()])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -127,6 +127,7 @@ def update(movie_id=None):
 
 @crud_blueprint.route('/delete', methods=["DELETE"])
 @crud_blueprint.route('/delete/<int:movie_id>', methods=["DELETE"])
+@authorize_if_admin
 def delete(movie_id=None):
     try:
         if not movie_id:
