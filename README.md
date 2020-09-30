@@ -63,7 +63,7 @@ $flask run
 5. /crud/update/<movie_id> 
     method - PATCH
     body - {
-        key : value,
+        key : value
     }
 
 6. /crud/delete/<movie_id>
