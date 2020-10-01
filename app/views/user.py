@@ -20,6 +20,10 @@ user_blueprint = Blueprint("user", __name__)
 def register():
     try:
         form = request.get_json()
+
+        if not form:
+            form = request.form            
+
         user_name = str(form.get("user_name", ""))
         password = str(form.get("password",""))
         user_role = str(form.get("user_role", "user"))
@@ -58,6 +62,10 @@ def register():
 def login():
     try:
         form = request.get_json()
+
+        if not form:
+            form = request.form
+            
         user_name = str(form.get("user_name"))
         password = str(form.get("password"))
         

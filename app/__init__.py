@@ -18,13 +18,9 @@ def create_app(test_config=None):
         #connect db
         sql_db.init_app(app)
     else:
-        # load the test config if passed in
-        app.config.from_mapping(test_config)
-        try:
-            # create folder for sqlite
-            os.makedirs(app.instance_path)
-        except OSError:
-            pass
+        app.config.from_pyfile("../.env")
+        #connect db
+        sql_db.init_app(app)
     
     for path, blueprint, url_prefix in blueprints:
         module = importlib.import_module(path)

@@ -42,6 +42,9 @@ def read(record_id=0):
 def create():
     try:
         entry = request.get_json()
+        if not entry:
+            entry = request.form
+
         movie = MoviesData()
 
         if not check_if_all_fields(entry):
@@ -85,6 +88,8 @@ def update(movie_id=None):
         update = dict()
         update["updated_at"] = datetime.datetime.now()
         request_content = request.get_json()
+        if not request_content:
+            request_content = request.form
         
         if request_content.get("99popularity"):
             update["nn_popularity"] = request_content.get("99popularity") 
@@ -149,7 +154,7 @@ def delete(movie_id=None):
         if e.__str__() ==  "Movie ID not found":
             return e.__str__() + "\n" + "please provide id of the movie you want to delete."    
         if e.__str__() ==  "No record corresponding to the ID provided":
-            return e.__str__()
+            return e.__str__() + ":" + (movie_id)
 
         traceback.print_exc()
         return "Something went wrong."
@@ -166,7 +171,6 @@ def check_if_all_fields(entry):
     if (name and nn_popularity and director and genre and imdb_score):
         return True
 
-    print(name,nn_popularity,director,genre,imdb_score) 
     return False
 
 def check_if_field_types_invalid(entry):
