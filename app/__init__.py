@@ -14,7 +14,8 @@ def create_app(test_config=None):
 
     if test_config is None:
         # load global environments, when not testing
-        app.config.from_pyfile("../.env")
+        if os.path.exists("../.env"):
+            app.config.from_pyfile("../.env")
         #connect db
         sql_db.init_app(app)
     else:
