@@ -14,11 +14,11 @@ def create_app(test_config=None):
 
     if test_config is None:
         # load global environments, when not testing
-        print("|"* 100)
-        print(os.environ)
-        print("|"* 100)
         if os.path.exists("../.env"):
             app.config.from_pyfile("../.env")
+        else:
+            app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["SQLALCHEMY_DATABASE_URI"]
+
         #connect db
         sql_db.init_app(app)
     else:
