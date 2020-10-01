@@ -45,7 +45,7 @@ $flask run
     {  
         "user_name" : "User Name",  
         "password" : "PassWord",  
-        "user_role": "admin/user")  
+        "user_role": "admin/user"  
     }  
     ```
   
