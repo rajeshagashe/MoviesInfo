@@ -14,7 +14,7 @@ def random_string_generator():
 username = random_string_generator()
 password = random_string_generator()
 
-print("username:", username, '\n', "password:", password)
+print("Testing with ", username, " as User")
 
 @pytest.fixture
 def client():
