@@ -1,0 +1,23 @@
+
+Improvements for scale
+- database read write separation.
+ DB Write (Main/master) to handle DB writes. 
+    That is admin activity of adding or editing or deleting a movie. 
+ There will be readonly replicas of the DB which will serve the get movie traffic. 
+    We can have multiple replicas and have load balancing between them.
+ Limitation: 
+    There is a small lag between master and replica data sync.
+    This seems acceptable trade off for this system.
+
+- Have a cache on top of the DB. 
+ Cache store movies information in key value pair,
+ so lookup is faster.
+
+- if search is on random/all keys, we can put our data on elastic search 
+ and create appropriate indices so that lookup will be faster.
+
+- If machines/servers are set up in different parts of the world,
+ India traffic is served from a machine situated in India. 
+ That reduces network latency.
+ Configure machines to cache movies that are more popular (looked up more often) 
+ in areas of concern.
