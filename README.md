@@ -45,7 +45,7 @@ $flask run
     {  
         "user_name" : "User Name",  
         "password" : "PassWord",  
-        "user_role": "admin"(or "user")  
+        "user_role": "admin/user")  
     }  
     ```
   
@@ -80,9 +80,9 @@ $flask run
     body - 
     ``` json
     {  
-        key : value  
+        "key" : "value"  
     }  
-    ``` json
+    ```
   
 6. /crud/delete/<movie_id>  
     method - DELETE  
