@@ -23,6 +23,13 @@ $flask db migrate
 $flask db upgrade
 $flask populate_db
 ```
+
+### run tests
+```sh
+$ pytest -v
+
+```
+
 ### Run
 
 ```sh
