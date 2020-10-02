@@ -19,7 +19,7 @@ class MoviesData(sql_db.Model):
         return_dict = {}
         return_dict['id'] = self.id
         return_dict['name'] = self.name
-        return_dict['nn_popularity'] = self.nn_popularity
+        return_dict['99popularity'] = self.nn_popularity
         return_dict['director'] = self.director
         return_dict['genre'] = self.genre
         return_dict['imdb_score'] = self.imdb_score
