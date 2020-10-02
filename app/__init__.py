@@ -18,6 +18,9 @@ def create_app(test_config=None):
             app.config.from_pyfile("../.env")
         else:
             app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["SQLALCHEMY_DATABASE_URI"]
+        print("||"* 100)
+        print(app.config["SQLALCHEMY_DATABASE_URI"])
+        print("||"* 100)
 
         #connect db
         sql_db.init_app(app)
