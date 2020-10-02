@@ -25,7 +25,10 @@ def create_app(test_config=None):
         #connect db
         sql_db.init_app(app)
     else:
-        app.config.from_pyfile("../.env")
+        if os.path.exists("../.env"):
+            app.config.from_pyfile("../.env")
+        else:
+            app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["SQLALCHEMY_DATABASE_URI"]
         #connect db
         sql_db.init_app(app)
     
