@@ -47,7 +47,7 @@ def register():
 
         sql_db.session.add(user)
         sql_db.session.commit()
-        return json.dumps([user.to_json(), {"status": "success", "msg": "User registered."}])
+        return json.dumps([user.to_json()])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -80,7 +80,7 @@ def login():
         session['user_id'] = user.id
 
         sql_db.session.commit()
-        return json.dumps([user.to_json(), {"status": "success", "msg": "Logged in"}])
+        return json.dumps([user.to_json()])
 
     except Exception as e:
         sql_db.session.rollback()

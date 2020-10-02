@@ -23,13 +23,13 @@ def read(record_id=0):
             response = list()
             for i in row:
                 response.append(i.to_json())
-            response.append({"status": "success", "msg": "crud/read msg"})
+
             return json.dumps(response)
         else:
             row = MoviesData.query.get(record_id)
 
         sql_db.session.commit()
-        return json.dumps([row.to_json(), {"status": "success", "msg": "crud/read msg"}])
+        return json.dumps([row.to_json()])
 
     except:
         sql_db.session.rollback()
@@ -64,7 +64,7 @@ def create():
         sql_db.session.add(movie)
         sql_db.session.commit()
 
-        return json.dumps([movie.to_json(), {"status": "success", "msg": "New movie added."}])
+        return json.dumps([movie.to_json()])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -118,7 +118,8 @@ def update(movie_id=None):
         sql_db.session.commit()
         
         update.pop("updated_at")
-        return json.dumps([update, {"status": "success", "msg": "Changes Saved."}])
+        update["id"] = movie_id
+        return json.dumps([update])
 
     except Exception as e:
         sql_db.session.rollback()
@@ -146,7 +147,7 @@ def delete(movie_id=None):
         target_row.delete()
         sql_db.session.commit()
 
-        return json.dumps([movie_details.to_json(), {"status": "success", "msg": "Deleted."}])
+        return json.dumps([movie_details.to_json()])
 
     except Exception as e:
         sql_db.session.rollback()

@@ -49,7 +49,6 @@ def search():
             # print(each.director, '\n')
             res.append(each.to_json()) 
 
-        res.append({"status": "success", "msg": "Search results returned successfully."})
         sql_db.session.commit()
         return json.dumps(res)
 
