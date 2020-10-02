@@ -127,6 +127,7 @@ def update(movie_id=None):
         sql_db.session.commit()
         
         update.pop("updated_at")
+        update["99popularity"] = update.pop("nn_popularity")
         update["id"] = movie_id
         return json.dumps([update])
 

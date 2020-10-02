@@ -57,7 +57,7 @@ def test_read(client):
     for each in res_json:
         assert isinstance(each.get("id"), (int, float))
         assert isinstance(each.get("name"), str)
-        assert isinstance(each.get("nn_popularity"), float)
+        assert isinstance(each.get("99popularity"), float)
         assert isinstance(each.get("director"), str)
         assert isinstance(each.get("genre"), str)
         assert isinstance(each.get("imdb_score"), float)
@@ -97,7 +97,7 @@ def test_search(client):
     for each in res_json:
         assert isinstance(each.get("id"), (int, float))
         assert isinstance(each.get("name"), str)
-        assert isinstance(each.get("nn_popularity"), float)
+        assert isinstance(each.get("99popularity"), float)
         assert isinstance(each.get("director"), str)
         assert isinstance(each.get("genre"), str)
         assert isinstance(each.get("imdb_score"), float)

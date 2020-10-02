@@ -63,7 +63,7 @@ def test_read_admin(client):
     for each in res_json:
         assert isinstance(each.get("id"), (int, float))
         assert isinstance(each.get("name"), str)
-        assert isinstance(each.get("nn_popularity"), float)
+        assert isinstance(each.get("99popularity"), float)
         assert isinstance(each.get("director"), str)
         assert isinstance(each.get("genre"), str)
         assert isinstance(each.get("imdb_score"), float)
@@ -87,7 +87,7 @@ def test_create_update_delete_admin(client):
     assert len(res_json) == 1
     assert isinstance(res_json[0].get("id"), (int, float))
     assert isinstance(res_json[0].get("name"), str)
-    assert isinstance(res_json[0].get("nn_popularity"), float)
+    assert isinstance(res_json[0].get("99popularity"), float)
     assert isinstance(res_json[0].get("director"), str)
     assert isinstance(res_json[0].get("genre"), str)
     assert isinstance(res_json[0].get("imdb_score"), float)
@@ -102,7 +102,7 @@ def test_create_update_delete_admin(client):
         "id" : movie_id,
         "name" : "movie",
         "director" : "director",
-        "nn_popularity": 50.0, 
+        "99popularity": 50.0, 
         "genre": ["Action"],
         "imdb_score": 5.0
     }
