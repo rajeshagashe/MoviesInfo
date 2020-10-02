@@ -33,7 +33,7 @@ def read(record_id=0):
         sql_db.session.commit()
         return json.dumps([row.to_json()])
 
-    except:
+    except Exception as e:
         if e.__str__() ==  "No record corresponding to the ID provided":
             return e.__str__() + ":" + (record_id)
 
