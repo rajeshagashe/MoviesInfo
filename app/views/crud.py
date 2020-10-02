@@ -27,7 +27,7 @@ def read(record_id=0):
             return json.dumps(response)
         else:
             row = MoviesData.query.get(record_id)
-            if not row.first():
+            if not row:
                 raise Exception("No record corresponding to the ID provided")
 
         sql_db.session.commit()
@@ -35,7 +35,7 @@ def read(record_id=0):
 
     except Exception as e:
         if e.__str__() ==  "No record corresponding to the ID provided":
-            return e.__str__() + ":" + (record_id)
+            return e.__str__() + ":" + str(record_id)
 
         sql_db.session.rollback()
         traceback.print_exc()
@@ -134,7 +134,7 @@ def update(movie_id=None):
         sql_db.session.rollback()
 
         if e.__str__() ==  "No record corresponding to the ID provided":
-            return e.__str__() + ":" + (movie_id)
+            return e.__str__() + ":" + str(movie_id)
         if e.__str__() ==  "Movie ID not found":
             return e.__str__() + "\n" + "please provide id of the movie you want to edit."
         if e.__str__() ==  "Invalid Field_types":
@@ -166,7 +166,7 @@ def delete(movie_id=None):
         if e.__str__() ==  "Movie ID not found":
             return e.__str__() + "\n" + "please provide id of the movie you want to delete."    
         if e.__str__() ==  "No record corresponding to the ID provided":
-            return e.__str__() + ":" + (movie_id)
+            return e.__str__() + ":" + str(movie_id)
 
         traceback.print_exc()
         return "Something went wrong."
