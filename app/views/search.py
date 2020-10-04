@@ -55,22 +55,3 @@ def search():
     except Exception as e:
         sql_db.session.rollback()
         return e.__str__()
-
-# @search_blueprint.before_app_request
-# def load_logged_in_user():
-#     user_id = session.get('user_id', 0)
-
-#     if not user_id:
-#         g.user = None
-#     else:
-#         g.user = get_user(user_id)
-
-# def get_user(user_id):
-#     user = UserData.query.filter_by(id=user_id)
-#     user_count = user.count()
-#     if user_count:
-#         return user.first()
-#     return False
-
-# from sqlalchemy import or_
-# filter(or_(User.name == 'ed', User.name == 'wendy'))

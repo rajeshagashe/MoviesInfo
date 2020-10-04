@@ -5,7 +5,6 @@ from flask import (
 from app.models.movies import MoviesData
 from app.extensions import sql_db
 from app.views.api_decorators import authenticate_if_user, authorize_if_admin
-# from app.views.search import get_user
 
 import traceback
 import datetime

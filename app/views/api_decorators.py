@@ -4,7 +4,7 @@ from functools import wraps
 def authenticate_if_user(func):
     @wraps(func)
     def wrap(**kwargs):
-        if g.user and g.user:            
+        if g.user:            
             res = func(**kwargs)
         else:
             res = "please log in to access movies info"

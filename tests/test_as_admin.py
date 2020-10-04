@@ -24,8 +24,8 @@ def client():
     with app.test_client() as client:
         yield client
 
-def test_register_admin(client):
-    """Make sure register works."""
+def test_register_and_login_admin(client):
+    """Make sure register and login works."""
 
     res = register_as_admin(client)
     res_json = json.loads(res.decode("utf-8"))
@@ -46,13 +46,6 @@ def test_register_admin(client):
 
     assert (login_user_id == reg_user_id and \
         login_user_name == reg_user_name and login_user_role == reg_user_role)
-
-
-# def test_login_admin(client):
-#     """Make sure login works."""
-
-#     res = login(client)
-#     assert b"{\"status\": \"success\", \"msg\": \"Logged in\"}" in res
 
 def test_read_admin(client):
     "'Make sure crud/read works'"
